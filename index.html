@@ -1029,7 +1029,7 @@ function openCheckout() {
     document.getElementById("checkout").style.display = "flex";
 
     document.getElementById("checkout-total").innerText =
-        document.getElementById("cart-total").innerText;
+    Number(document.getElementById("cart-total").innerText) + 250;
 }
 
 
@@ -1057,7 +1057,7 @@ function placeOrder() {
     message += "Phone: " + phone + "%0A";
     message += "Address: " + address + "%0A%0A";
 
-    let total = 0;
+    let deliveryCharges = 250;
 
     cart.forEach(item => {
 
@@ -1072,8 +1072,8 @@ function placeOrder() {
             "%0A";
     });
 
-    message += "%0ATotal: Rs. " + total;
-
+   message += "%0ADelivery Charges: Rs. 250";
+message += "%0ATotal: Rs. " + (total + deliveryCharges);
     window.open(
         "https://wa.me/923014201493?text=" + message,
         "_blank"
