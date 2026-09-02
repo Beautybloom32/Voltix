@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VOLTIX - Mobile Accessories</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #111;
+}
+
+/* TOP BAR */
+.top-bar {
+    background: #111;
+    color: white;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.top-bar span {
+    margin-right: 20px;
+}
+
+/* HEADER */
+header {
+    background: #000;
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo-text span {
+    color: #ffd000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffd000;
+}
+
+.cart-button {
+    background: #ffd000;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    min-height: 470px;
+    background: linear-gradient(120deg, #050505, #151515);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 50px 7%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #ffd000;
+    right: -200px;
+    top: -100px;
+    transform: rotate(25deg);
+    opacity: 0.9;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 2;
+}
+
+.hero small {
+    color: #ffd000;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: #ffd000;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.shop-btn {
+    margin-top: 25px;
+    padding: 15px 30px;
+    background: #ffd000;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* FEATURES */
+.features {
+    background: white;
+    padding: 25px 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.feature {
+    padding: 15px;
+}
+
+.feature h3 {
+    margin: 8px 0;
+}
+
+/* PRODUCTS */
+.products-section {
+    padding: 50px 5%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 35px;
+}
+
+.section-title span {
+    color: #d5a900;
+}
+
+/* PRODUCT GRID */
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.product {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    position: relative;
+    transition: 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.product img {
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    padding: 15px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.product p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+    margin-left: 7px;
+}
+
+.discount {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffd000;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.add-cart {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-cart:hover {
+    background: #ffd000;
+    color: #000;
+}
+
+/* CART */
+.cart {
+    position: fixed;
+    right: -420px;
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    z-index: 2000;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.25);
+    padding: 25px;
+    transition: 0.4s;
+    overflow-y: auto;
+}
+
+.cart.open {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-cart {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-item {
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.quantity button {
+    padding: 4px 9px;
+    margin: 5px 2px;
+    cursor: pointer;
+}
+
+.remove {
+    color: red;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.cart-total {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.whatsapp {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* OWNER */
+.owner {
+    background: #000;
+    color: white;
+    padding: 40px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.owner h2 {
+    color: #ffd000;
+    margin-bottom: 10px;
+}
+
+.owner-name {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 25px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+
+    nav {
+        display: none;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product img {
+        height: 170px;
+        padding: 8px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .product h3 {
+        font-size: 15px;
+    }
+
+    .product p {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .add-cart {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        min-height: 400px;
+        padding: 40px 25px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .cart {
+        width: 90%;
+    }
+
+    .owner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div>
+        <span>🚚 Fast Delivery</span>
+        <span>🛡 Premium Quality</span>
+        <span>↩ 7 Days Return</span>
+    </div>
+    <div>📞 +92 301 4201493</div>
+</div>
+
+<!-- HEADER -->
+<header>
+
+    <div class="logo">
+        <img src="logo.png" alt="Voltix Logo">
+        <div class="logo-text">
+            VOLT<span>IX</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#products">Categories</a>
+        <a href="#owner">About Us</a>
+    </nav>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <small>PREMIUM QUALITY</small>
+
+        <h1>
+            MOBILE ACCESSORIES
+            <br>
+            <span>THAT POWER YOUR LIFE</span>
+        </h1>
+
+        <p>
+            Discover quality earbuds, chargers, cables,
+            power banks, mobile covers and more.
+        </p>
+
+        <button class="shop-btn"
+                onclick="document.getElementById('products').scrollIntoView()">
+            SHOP NOW →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+    <div class="feature">
+        <div>🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Quick delivery</p>
+    </div>
+
+    <div class="feature">
+        <div>🛡</div>
+        <h3>Premium Quality</h3>
+        <p>Quality products</p>
+    </div>
+
+    <div class="feature">
+        <div>🔒</div>
+        <h3>Secure Payment</h3>
+        <p>Safe shopping</p>
+    </div>
+
+    <div class="feature">
+        <div>↩</div>
+        <h3>7 Days Return</h3>
+        <p>Easy return policy</p>
+    </div>
+
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+
+    <div class="section-title">
+        <h2>Featured <span>Products</span></h2>
+        <p>Explore our latest mobile accessories</p>
+    </div>
+
+    <div class="products">
+
+        <!-- PRODUCT 1 -->
+        <div class="product">
+
+            <span class="discount">-15%</span>
+
+            <img src="product1.jpg.jpeg" alt="Wireless Earbuds">
+
+            <div class="product-info">
+
+                <h3>Wireless Earbuds</h3>
+
+                <p>Premium wireless earbuds with clear sound.</p>
+
+                <div class="price">
+                    Rs. 1,299
+                    <span class="old-price">Rs. 1,499</span>
+                </div>
+
+                <button class="add-cart"
+                onclick="addToCart('Wireless Earbuds',1299,'product1.jpg.jpeg')">
+                    🛒 ADD TO CART
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+        <div class="product">
+
+            <span class="discount">-10%</span>
+
+            <img src="product2.jpg.jpeg" alt="Fast Charger">
+
+            <div class="product-info">
+
+                <h3>20W Fast Charger</h3>
+
+                <p>Fast and reliable mobile charger.</p>
+
+                <div class="price">
+                    Rs. 799
+                    <span class="old-price">Rs. 899</span>
+                </div>
+
+                <button class="add-cart"
+                onclick="addToCart('20W Fast Charger',799,'product2.jpg.jpeg')">
+                    🛒 ADD TO CART
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+        <div class="product">
+
+            <span class="discount">-20%</span>
+
+            <img src="product3.jpg.jpeg" alt="Type C Cable">
+
+            <div class="product-info">
+
+                <h3>Type-C Fast Cable</h3>
+
+                <p>Durable fast charging cable.</p>
+
+                <div class="price">
+                    Rs. 399
+                    <span class="old-price">Rs. 499</span>
+                </div>
+
+                <button class="add-cart"
+                onclick="addToCart('Type-C Fast Cable',399,'product3.jpg.jpeg')">
+                    🛒 ADD TO CART
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+        <div class="product">
+
+            <span class="discount">-14%</span>
+
+            <img src="product4.jpg.jpeg" alt="Power Bank">
+
+            <div class="product-info">
+
+                <h3>10000mAh Power Bank</h3>
+
+                <p>Powerful portable charging solution.</p>
+
+                <div class="price">
+                    Rs. 1,199
+                    <span class="old-price">Rs. 1,399</span>
+                </div>
+
+                <button class="add-cart"
+                onclick="addToCart('10000mAh Power Bank',1199,'product4.jpg.jpeg')">
+                    🛒 ADD TO CART
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+        <div class="product">
+
+            <span class="discount">-17%</span>
+
+            <img src="product5.jpg.jpeg" alt="Mobile Cover">
+
+            <div class="product-info">
+
+                <h3>Shockproof Mobile Cover</h3>
+
+                <p>Stylish and protective mobile cover.</p>
+
+                <div class="price">
+                    Rs. 499
+                    <span class="old-price">Rs. 599</span>
+                </div>
+
+                <button class="add-cart"
+                onclick="addToCart('Shockproof Mobile Cover',499,'product5.jpg.jpeg')">
+                    🛒 ADD TO CART
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+<div class="cart" id="cart">
+
+    <div class="cart-header">
+
+        <h2>Your Cart</h2>
+
+        <span class="close-cart" onclick="closeCart()">×</span>
+
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-total">
+        Total: Rs. <span id="cart-total">0</span>
+    </div>
+
+    <button class="whatsapp" onclick="orderWhatsApp()">
+        📱 ORDER ON WHATSAPP
+    </button>
+
+</div>
+
+
+<!-- OWNER -->
+<section class="owner" id="owner">
+
+    <div>
+
+        <h2>BUSINESS OWNER</h2>
+
+        <div class="owner-name">
+            Sheikh Ajwa Muhammad amir
+        </div>
+
+    </div>
+
+    <div>
+        <h3>⚡ VOLTIX</h3>
+        <p>Mobile Accessories</p>
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>© 2026 VOLTIX Mobile Accessories. All Rights Reserved.</p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+/* ADD TO CART */
+function addToCart(name, price, image) {
+
+    let existing = cart.find(item => item.name === name);
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+
+    }
+
+    updateCart();
+
+    openCart();
+}
+
+
+/* UPDATE CART */
+function updateCart() {
+
+    let container = document.getElementById("cart-items");
+
+    container.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.quantity;
+
+        count += item.quantity;
+
+        container.innerHTML += `
+
+        <div class="cart-item">
+
+            <img src="${item.image}">
+
+            <div class="cart-item-info">
+
+                <h3>${item.name}</h3>
+
+                <p>Rs. ${item.price}</p>
+
+                <div class="quantity">
+
+                    <button onclick="decrease(${index})">−</button>
+
+                    ${item.quantity}
+
+                    <button onclick="increase(${index})">+</button>
+
+                </div>
+
+                <span class="remove"
+                onclick="removeItem(${index})">
+                    Remove
+                </span>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("cart-total").innerText = total;
+
+    document.getElementById("cart-count").innerText = count;
+
+}
+
+
+/* INCREASE */
+function increase(index) {
+
+    cart[index].quantity++;
+
+    updateCart();
+
+}
+
+
+/* DECREASE */
+function decrease(index) {
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    } else {
+
+        cart.splice(index, 1);
+
+    }
+
+    updateCart();
+
+}
+
+
+/* REMOVE */
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+/* OPEN CART */
+function openCart() {
+
+    document.getElementById("cart")
+    .classList.add("open");
+
+}
+
+
+/* CLOSE CART */
+function closeCart() {
+
+    document.getElementById("cart")
+    .classList.remove("open");
+
+}
+
+
+/* WHATSAPP ORDER */
+function orderWhatsApp() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty!");
+
+        return;
+
+    }
+
+    let message = "Assalam o Alaikum! I want to order:%0A%0A";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        let itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        message +=
+        "• " + item.name +
+        " x" + item.quantity +
+        " = Rs. " + itemTotal +
+        "%0A";
+
+    });
+
+    message +=
+    "%0ATotal: Rs. " + total +
+    "%0A%0AThank you!";
+
+    window.open(
+        "https://wa.me/923014201493?text=" + message,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
